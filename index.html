@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labb JavaScript</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Labb JavaScript</h1>
+    <p>Öppna konsolen i webbläsaren (F12) för att se output.</p>
+
+    <!--
+    Reflektion uppgift 1
+
+    Placeringen av <script>-taggen:
+    Webbläsaren läser HTML-filen uppifrån och ned. När den hittar en script-tagg
+    stannar den och kör skriptet innan den läser vidare. Om scriptet ligger i
+    <head> körs det alltså innan sidans innehåll har laddats, och då kan det
+    inte hitta elementen på sidan. Därför brukar man lägga scriptet längst ned
+    i <body>.
+
+    Attributet defer:
+    Med defer laddas skriptet i bakgrunden medan webbläsaren läser klart HTML:en,
+    och skriptet körs först när hela sidan är inläst. Då kan man ha script-taggen
+    i <head> utan problem.
+    -->
+  </body>
+</html>
