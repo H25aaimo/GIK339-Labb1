@@ -11,19 +11,20 @@
     <p>Öppna konsolen i webbläsaren (F12) för att se output.</p>
 
     <!--
-    Reflektion uppgift 1
+    Reflektion uppgift 1:
 
-    Placeringen av <script>-taggen:
-    Webbläsaren läser HTML-filen uppifrån och ned. När den hittar en script-tagg
-    stannar den och kör skriptet innan den läser vidare. Om scriptet ligger i
-    <head> körs det alltså innan sidans innehåll har laddats, och då kan det
-    inte hitta elementen på sidan. Därför brukar man lägga scriptet längst ned
-    i <body>.
+    Script-taggens placering:
+    Webbläsaren läser HTML-filen uppifrån och ned.
+    Om script-taggen ligger i head utan defer körs JavaScript
+    innan resten av HTML-sidan har lästs klart.
+    Om man istället placerar script-taggen längst ner i body
+    har HTML-innehållet redan lästs in när skriptet körs.
 
     Attributet defer:
-    Med defer laddas skriptet i bakgrunden medan webbläsaren läser klart HTML:en,
-    och skriptet körs först när hela sidan är inläst. Då kan man ha script-taggen
-    i <head> utan problem.
+    Defer gör att JavaScript-filen laddas samtidigt som
+    webbläsaren läser HTML-dokumentet.
+    Skriptet körs först när HTML-dokumentet har lästs klart.
+    Därför kan script-taggen ligga i head utan problem.
     -->
   </body>
 </html>

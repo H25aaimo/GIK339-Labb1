@@ -1,44 +1,43 @@
 // ===================== Uppgift 2 – Variabler och scope =====================
 
 console.log("--- Uppgift 2: före blocket ---");
-console.log(varVariabel); // undefined
-console.log(typeof letVariabel); // "undefined"
-console.log(typeof constVariabel); // "undefined"
+console.log(country); // undefined
+console.log(typeof hobby); // "undefined"
+console.log(typeof food); // "undefined"
 
 {
-  var varVariabel = "Jag är en var";
-  let letVariabel = "Jag är en let";
-  const constVariabel = "Jag är en const";
+  var country = "Sverige";
+  let hobby = "Träning";
+  const food = "Pasta";
 
   console.log("--- Uppgift 2: inuti blocket ---");
-  console.log(varVariabel);
-  console.log(letVariabel);
-  console.log(constVariabel);
+  console.log(country);
+  console.log(hobby);
+  console.log(food);
 }
 
 console.log("--- Uppgift 2: efter blocket ---");
-console.log(varVariabel);
-console.log(typeof letVariabel);
-console.log(typeof constVariabel);
+console.log(country);
+console.log(typeof hobby);
+console.log(typeof food);
 
 /*
-Reflektion uppgift 2
+Reflektion uppgift 2:
 
-Skillnad mellan var, let och const när det gäller block:
-- var bryr sig inte om block. Även om jag deklarerar den inuti { } går den
-  att använda utanför blocket också.
-- let och const fungerar bara inuti blocket där de är deklarerade. Utanför
-  blocket finns de inte, och om man försöker skriva ut dem får man ett
-  ReferenceError. Därför använde jag typeof, då kraschar inte koden.
-- Skillnaden mellan let och const är att värdet i en const inte går att ändra
-  efteråt.
+Skillnaden mellan var, let och const:
+- var fungerar även utanför blocket där den deklareras.
+- let och const fungerar bara inuti blocket där de deklareras.
+- Med let kan man ändra värdet senare, medan const inte kan tilldelas ett nytt värde.
 
-Vad som händer med console.log på olika ställen:
-- Före blocket: var skriver ut undefined eftersom variabeln finns men inte
-  har fått sitt värde än. let och const finns inte alls än.
-- I blocket: alla tre skriver ut sina värden.
-- Efter blocket: bara var skriver ut sitt värde. let och const finns inte
-  längre utanför blocket.
+Vad som händer med console.log:
+- Före blocket: var visar undefined eftersom variabeln är deklarerad men ännu inte fått sitt värde. let och const går inte att nå utanför blocket.
+- Inuti blocket: alla tre variablerna skriver ut sina värden.
+- Efter blocket: var fungerar fortfarande, men let och const går inte längre att komma åt.
+
+Jag använde typeof för att kontrollera let och const utanför blocket.
+Om jag hade försökt skriva ut variablerna direkt hade det blivit
+ett ReferenceError eftersom de inte är tillgängliga utanför blocket.
+Med typeof kan jag kontrollera dem utan att programmet kraschar.
 */
 
 // ===================== Uppgift 3 & 4 – Funktionen add =====================
@@ -50,10 +49,10 @@ const add = (num1, num2) => {
   console.log(num2 === 0);
   console.log(num1 == NaN);
 
-  // ternary operator
+  // Ternary operator
   console.log(num1 ? "truthy" : "falsy");
 
-  // kollar att båda är tal och inte null/undefined
+  // Kontrollerar att båda värdena är tal och inte null, undefined eller NaN.
   if (
     !(
       num1 === null ||
@@ -74,44 +73,45 @@ const add = (num1, num2) => {
 };
 
 /*
-Reflektion uppgift 3
+Reflektion uppgift 3:
 
-Om jag hade använt let istället för const:
-Då hade funktionen fungerat likadant, men man hade kunnat skriva över
-add med ett annat värde senare. Med const går inte det.
+Om jag hade använt let istället för const hade funktionen fungerat på samma sätt.
+Skillnaden är att jag hade kunnat tilldela variabeln add ett nytt värde senare.
 
-Samma funktion med funktionsdeklaration:
+Samma funktion med en funktionsdeklaration:
 
-    function add(num1, num2) {
-        return num1 + num2;
-    }
+function add(num1, num2) {
+    return num1 + num2;
+}
 
-Att en funktion returnerar något:
-Det betyder att funktionen skickar tillbaka ett värde dit där den anropades,
-till exempel const svar = add(2, 3); då blir svar 5. När return körs
-avslutas funktionen. Om man inte har någon return får man undefined tillbaka.
+Att en funktion returnerar något betyder att den skickar tillbaka
+ett värde till den plats där funktionen anropades.
+Exempel: add(2, 3) returnerar 5.
+När return körs avslutas funktionen.
+Om funktionen inte har någon return får man undefined tillbaka.
 */
 
 /*
-Reflektion uppgift 4
+Reflektion uppgift 4:
 
-Ternary operator:
-Det är en kortare variant av if/else som skrivs villkor ? om sant : om falskt.
-Den ger tillbaka ett värde som man kan skriva ut eller spara i en variabel.
-En if-sats ger inget värde utan används för att styra vad programmet gör,
-och passar bättre när det är mycket kod eller flera villkor.
+En ternary operator är ett kortare sätt att skriva ett villkor.
+Den skrivs med villkor ? värde om sant : värde om falskt.
+En if-sats används istället för att styra vad programmet ska göra
+och passar bättre när man har flera instruktioner.
 
-Skillnad mellan == och ===:
-Med == jämförs bara värdet och JavaScript försöker göra om typerna så att de
-stämmer, så 0 == '0' blir true. Med === måste både värde och typ vara samma,
-så 0 === '0' blir false. Därför är === säkrare att använda. NaN är aldrig
-lika med något, inte ens NaN, så num1 == NaN blir alltid false.
+Skillnaden mellan == och ===:
+Två likhetstecken jämför värden och JavaScript kan ändra datatypen
+vid jämförelsen. Tre likhetstecken jämför både värde och datatyp.
+Exempelvis blir 0 == "0" true, medan 0 === "0" blir false.
 
-Så löste jag kontrollen av null:
-Jag skrev num1 === null || num1 === undefined (och samma för num2) och satte
-! framför hela uttrycket så att det bara går vidare om ingen av dem är
-null eller undefined. Sedan la jag till typeof === "number" med && för att
-kontrollera att båda är tal.
+NaN är speciellt eftersom det aldrig är lika med något, inte ens sig självt.
+Därför blir num1 == NaN alltid false.
+
+För att kontrollera null och undefined använde jag || för att kontrollera
+om något av värdena har dessa värden.
+Jag satte ! framför hela uttrycket för att vända resultatet.
+Med && kontrollerar jag sedan att båda parametrarna är nummer
+och inte NaN.
 */
 
 // ===================== Uppgift 5 – Anropa funktioner =====================
@@ -144,32 +144,73 @@ console.log(num1);
 console.log(sum);
 
 /*
-Reflektion uppgift 5
+Reflektion uppgift 5:
 
-Parameter, variabel och argument:
-- Parameter är namnen som står inom parentesen när man skapar funktionen
-  (num1 och num2).
-- Argument är värdena man skickar in när man anropar funktionen, till
-  exempel 3 och 5 i add(3, 5).
-- Variabel är något man skapar med let, const eller var för att spara ett värde.
+Skillnaden mellan parameter, variabel och argument:
+- En parameter är namnet som står inom parentesen när man skapar en funktion.
+  I detta fall num1 och num2.
+- Ett argument är värdet man skickar in när man anropar funktionen,
+  exempelvis 3 och 5 i add(3, 5).
+- En variabel används för att spara ett värde.
 
-Sista outputen (num1):
-Den blir 0. Den globala num1 har värdet 0 och ändras aldrig. Parametern num1
-inne i funktionen är en annan, lokal variabel som bara finns i funktionen.
-Sist skrivs även sum ut, och den är -5 från test 4.
+Det sista värdet på num1 blir 0 eftersom den globala variabeln
+num1 aldrig ändras. Parametern num1 i funktionen är en separat variabel.
 
-Vad varje test ger (varje anrop skriver först ut jämförelserna och
-truthy/falsy):
-- Test 1: sum är false, alltså en boolean och inte ett tal. Den går in i else
-  och ger "Felaktig input". Ternary ger "falsy".
-- Test 2: "0" är en sträng. Else körs. Ternary ger "truthy" eftersom en sträng
-  med innehåll är truthy.
-- Test 3: "num1" med citattecken är bara text och inte variabeln num1, så num2
-  är inte ett tal. Else körs.
-- Test 4: -5 och num1 (som är 0) är båda tal, så summan -5 returneras och
-  sparas i sum.
-- Test 5: arg1 har inget värde och är undefined, så else körs. Ternary ger
-  "falsy".
-- Test 6: inga argument, så båda är undefined. Else körs.
-Överallt blir num1 == NaN false.
+Sum blir -5 eftersom test 4 sparar resultatet från add(-5, num1)
+i variabeln sum.
+
+Förklaring av testerna:
+
+Test 1:
+sum har värdet false och 1 är ett nummer.
+num1 == 0 blir true eftersom false == 0 är sant med ==.
+num2 === "0" blir false eftersom 1 inte är texten "0".
+num2 === 0 blir false eftersom 1 inte är 0.
+num1 == NaN blir false eftersom NaN aldrig är lika med något.
+Ternary operator skriver ut falsy eftersom false är falsy.
+Funktionen returnerar "Felaktig input".
+
+Test 2:
+"0" är en sträng och 3 är ett nummer.
+num1 == 0 blir true eftersom JavaScript omvandlar "0" till 0.
+num2 === "0" blir false eftersom 3 inte är texten "0".
+num2 === 0 blir false eftersom 3 inte är 0.
+num1 == NaN blir false.
+Ternary operator skriver ut truthy eftersom "0" är en sträng med innehåll.
+Funktionen returnerar "Felaktig input".
+
+Test 3:
+3 är ett nummer och "num1" är text.
+num1 == 0 blir false eftersom 3 inte är 0.
+num2 === "0" blir false eftersom "num1" inte är "0".
+num2 === 0 blir false eftersom "num1" är text.
+num1 == NaN blir false.
+Ternary operator skriver ut truthy eftersom 3 är truthy.
+Funktionen returnerar "Felaktig input".
+
+Test 4:
+-5 och num1 (0) är båda nummer.
+num1 == 0 blir false eftersom -5 inte är 0.
+num2 === "0" blir false eftersom num2 är ett nummer och inte text.
+num2 === 0 blir true eftersom num2 är 0.
+num1 == NaN blir false.
+Ternary operator skriver ut truthy eftersom -5 är truthy.
+Funktionen returnerar -5 och sparar resultatet i sum.
+
+Test 5:
+arg1 saknar ett värde och är därför undefined.
+num1 == 0 blir false eftersom undefined inte är 0.
+num2 === "0" blir false eftersom 7 inte är texten "0".
+num2 === 0 blir false eftersom 7 inte är 0.
+num1 == NaN blir false.
+Ternary operator skriver ut falsy eftersom undefined är falsy.
+Funktionen returnerar "Felaktig input".
+
+Test 6:
+Inga argument skickas till funktionen.
+Både num1 och num2 får därför värdet undefined.
+Jämförelserna blir false och ternary operator skriver ut falsy.
+Funktionen returnerar "Felaktig input".
+
+num1 == NaN blir alltid false eftersom NaN aldrig är lika med något.
 */
